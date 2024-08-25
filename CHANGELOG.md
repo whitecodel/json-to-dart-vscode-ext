@@ -1,9 +1,14 @@
-# Change Log
+## [1.0.0] - 2024-08-25
 
-All notable changes to the "json-to-dart" extension will be documented in this file.
+### Added
+- Initial release of the JSON to Dart Model Converter extension.
+- Support for converting JSON input to Dart model.
+- Null Safety support.
+- Option to include encoder and decoder in the Dart class.
+- Option to make all properties required.
+- Option to make all properties final.
+- Option to generate a `CopyWith` method.
+- Option to use `num` for numeric properties.
+- Handling of nested JSON structures.
+- All generated classes are saved in a single file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
