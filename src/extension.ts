@@ -11,7 +11,7 @@ interface Options {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    let disposable = vscode.commands.registerCommand('json-to-dart.Start', () => {
+    let disposable = vscode.commands.registerCommand('whitecodel-json-to-dart.Start', () => {
         const panel = vscode.window.createWebviewPanel(
             'jsonToDart', // Identifies the type of the webview
             'JSON to Dart', // Title of the panel displayed to the user
