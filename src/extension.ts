@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
-import generateDartClassFromString from './json_to_dart';
+import { generateDartClassFromString } from './generateDartClassFromString';
+
+
 
 interface Options {
     nullSafety?: boolean;
