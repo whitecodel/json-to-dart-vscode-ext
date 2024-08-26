@@ -1,28 +1,34 @@
 class GeneratedModel {
-  final String name;
-  final String displayName;
-  final String description;
-  final String version;
-  final Engines engines;
-  final List<String> categories;
-  final List<dynamic> activationEvents;
-  final String main;
-  final Contributes contributes;
-  final Scripts scripts;
-  final DevDependencies devDependencies;
+  final String? name;
+  final String? displayName;
+  final String? description;
+  final String? version;
+  final String? publisher;
+  final String? repository;
+  final Engines? engines;
+  final List<String?>? categories;
+  final List<dynamic>? activationEvents;
+  final List<ContributesTest?>? contributesTest;
+  final String? main;
+  final Contributes? contributes;
+  final Scripts? scripts;
+  final DevDependencies? devDependencies;
 
   GeneratedModel({
-    required this.name,
-    required this.displayName,
-    required this.description,
-    required this.version,
-    required this.engines,
-    required this.categories,
-    required this.activationEvents,
-    required this.main,
-    required this.contributes,
-    required this.scripts,
-    required this.devDependencies,
+    this.name,
+    this.displayName,
+    this.description,
+    this.version,
+    this.publisher,
+    this.repository,
+    this.engines,
+    this.categories,
+    this.activationEvents,
+    this.contributesTest,
+    this.main,
+    this.contributes,
+    this.scripts,
+    this.devDependencies,
   });
 
   factory GeneratedModel.fromJson(Map<String, dynamic> json) {
@@ -31,9 +37,14 @@ class GeneratedModel {
       displayName: json['displayName'],
       description: json['description'],
       version: json['version'],
+      publisher: json['publisher'],
+      repository: json['repository'],
       engines: Engines.fromJson(json['engines']),
       categories: json['categories'],
-      activationEvents: json['activationEvents'],
+      activationEvents: List<dynamic>.from(json['activationEvents']),
+      contributesTest: (json['contributesTest'] as List<dynamic>)
+          .map((item) => ContributesTest.fromJson(item))
+          .toList(),
       main: json['main'],
       contributes: Contributes.fromJson(json['contributes']),
       scripts: Scripts.fromJson(json['scripts']),
@@ -47,66 +58,42 @@ class GeneratedModel {
       'displayName': displayName,
       'description': description,
       'version': version,
-      'engines': engines.toJson(),
-      'categories': categories,
-      'activationEvents': activationEvents,
+      'publisher': publisher,
+      'repository': repository,
+      'engines': engines?.toJson(),
+      'categories': categories?.map((item) => item).toList(),
+      'activationEvents': activationEvents?.map((item) => item).toList(),
+      'contributesTest':
+          contributesTest?.map((item) => item?.toJson()).toList(),
       'main': main,
-      'contributes': contributes.toJson(),
-      'scripts': scripts.toJson(),
-      'devDependencies': devDependencies.toJson(),
+      'contributes': contributes?.toJson(),
+      'scripts': scripts?.toJson(),
+      'devDependencies': devDependencies?.toJson(),
     };
-  }
-
-  GeneratedModel copyWith({
-    String? name,
-    String? displayName,
-    String? description,
-    String? version,
-    Engines? engines,
-    List<String>? categories,
-    List<dynamic>? activationEvents,
-    String? main,
-    Contributes? contributes,
-    Scripts? scripts,
-    DevDependencies? devDependencies,
-  }) {
-    return GeneratedModel(
-      name: name ?? this.name,
-      displayName: displayName ?? this.displayName,
-      description: description ?? this.description,
-      version: version ?? this.version,
-      engines: engines ?? this.engines,
-      categories: categories ?? this.categories,
-      activationEvents: activationEvents ?? this.activationEvents,
-      main: main ?? this.main,
-      contributes: contributes ?? this.contributes,
-      scripts: scripts ?? this.scripts,
-      devDependencies: devDependencies ?? this.devDependencies,
-    );
   }
 }
 
 class DevDependencies {
-  final String typesVscode;
-  final String typesMocha;
-  final String typesNode;
-  final String typescriptEslintEslintPlugin;
-  final String typescriptEslintParser;
-  final String eslint;
-  final String typescript;
-  final String vscodeTestCli;
-  final String vscodeTestElectron;
+  final String? typesVscode;
+  final String? typesMocha;
+  final String? typesNode;
+  final String? typescriptEslintEslintPlugin;
+  final String? typescriptEslintParser;
+  final String? eslint;
+  final String? typescript;
+  final String? vscodeTestCli;
+  final String? vscodeTestElectron;
 
   DevDependencies({
-    required this.typesVscode,
-    required this.typesMocha,
-    required this.typesNode,
-    required this.typescriptEslintEslintPlugin,
-    required this.typescriptEslintParser,
-    required this.eslint,
-    required this.typescript,
-    required this.vscodeTestCli,
-    required this.vscodeTestElectron,
+    this.typesVscode,
+    this.typesMocha,
+    this.typesNode,
+    this.typescriptEslintEslintPlugin,
+    this.typescriptEslintParser,
+    this.eslint,
+    this.typescript,
+    this.vscodeTestCli,
+    this.vscodeTestElectron,
   });
 
   factory DevDependencies.fromJson(Map<String, dynamic> json) {
@@ -136,49 +123,23 @@ class DevDependencies {
       '@vscode/test-electron': vscodeTestElectron,
     };
   }
-
-  DevDependencies copyWith({
-    String? typesVscode,
-    String? typesMocha,
-    String? typesNode,
-    String? typescriptEslintEslintPlugin,
-    String? typescriptEslintParser,
-    String? eslint,
-    String? typescript,
-    String? vscodeTestCli,
-    String? vscodeTestElectron,
-  }) {
-    return DevDependencies(
-      typesVscode: typesVscode ?? this.typesVscode,
-      typesMocha: typesMocha ?? this.typesMocha,
-      typesNode: typesNode ?? this.typesNode,
-      typescriptEslintEslintPlugin:
-          typescriptEslintEslintPlugin ?? this.typescriptEslintEslintPlugin,
-      typescriptEslintParser:
-          typescriptEslintParser ?? this.typescriptEslintParser,
-      eslint: eslint ?? this.eslint,
-      typescript: typescript ?? this.typescript,
-      vscodeTestCli: vscodeTestCli ?? this.vscodeTestCli,
-      vscodeTestElectron: vscodeTestElectron ?? this.vscodeTestElectron,
-    );
-  }
 }
 
 class Scripts {
-  final String vscodePrepublish;
-  final String compile;
-  final String watch;
-  final String pretest;
-  final String lint;
-  final String test;
+  final String? vscodePrepublish;
+  final String? compile;
+  final String? watch;
+  final String? pretest;
+  final String? lint;
+  final String? test;
 
   Scripts({
-    required this.vscodePrepublish,
-    required this.compile,
-    required this.watch,
-    required this.pretest,
-    required this.lint,
-    required this.test,
+    this.vscodePrepublish,
+    this.compile,
+    this.watch,
+    this.pretest,
+    this.lint,
+    this.test,
   });
 
   factory Scripts.fromJson(Map<String, dynamic> json) {
@@ -202,61 +163,59 @@ class Scripts {
       'test': test,
     };
   }
-
-  Scripts copyWith({
-    String? vscodePrepublish,
-    String? compile,
-    String? watch,
-    String? pretest,
-    String? lint,
-    String? test,
-  }) {
-    return Scripts(
-      vscodePrepublish: vscodePrepublish ?? this.vscodePrepublish,
-      compile: compile ?? this.compile,
-      watch: watch ?? this.watch,
-      pretest: pretest ?? this.pretest,
-      lint: lint ?? this.lint,
-      test: test ?? this.test,
-    );
-  }
 }
 
 class Contributes {
-  final List<Commands> commands;
+  final List<Commands?>? commands;
 
   Contributes({
-    required this.commands,
+    this.commands,
   });
 
   factory Contributes.fromJson(Map<String, dynamic> json) {
     return Contributes(
-      commands: json['commands'],
+      commands: (json['commands'] as List<dynamic>)
+          .map((item) => Commands.fromJson(item))
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'commands': commands,
+      'commands': commands?.map((item) => item?.toJson()).toList(),
     };
   }
+}
 
-  Contributes copyWith({
-    List<Commands>? commands,
-  }) {
-    return Contributes(
-      commands: commands ?? this.commands,
+class ContributesTest {
+  final List<Commands?>? commands;
+
+  ContributesTest({
+    this.commands,
+  });
+
+  factory ContributesTest.fromJson(Map<String, dynamic> json) {
+    return ContributesTest(
+      commands: (json['commands'] as List<dynamic>)
+          .map((item) => Commands.fromJson(item))
+          .toList(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'commands': commands?.map((item) => item?.toJson()).toList(),
+    };
   }
 }
 
 class Commands {
-  final String command;
-  final String title;
+  final String? command;
+  final String? title;
 
   Commands({
-    required this.command,
-    required this.title,
+    this.command,
+    this.title,
   });
 
   factory Commands.fromJson(Map<String, dynamic> json) {
@@ -272,23 +231,13 @@ class Commands {
       'title': title,
     };
   }
-
-  Commands copyWith({
-    String? command,
-    String? title,
-  }) {
-    return Commands(
-      command: command ?? this.command,
-      title: title ?? this.title,
-    );
-  }
 }
 
 class Engines {
-  final String vscode;
+  final String? vscode;
 
   Engines({
-    required this.vscode,
+    this.vscode,
   });
 
   factory Engines.fromJson(Map<String, dynamic> json) {
@@ -301,13 +250,5 @@ class Engines {
     return {
       'vscode': vscode,
     };
-  }
-
-  Engines copyWith({
-    String? vscode,
-  }) {
-    return Engines(
-      vscode: vscode ?? this.vscode,
-    );
   }
 }

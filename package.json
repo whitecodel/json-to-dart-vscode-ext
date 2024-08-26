@@ -2,7 +2,7 @@
   "name": "whitecodel-json-to-dart",
   "displayName": "WhiteCodel Json To Dart",
   "description": "Convert JSON data to Dart model classes",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "WhiteCodel",
   "repository": "https://github.com/whitecodel/json-to-dart-vscode-ext",
   "engines": {

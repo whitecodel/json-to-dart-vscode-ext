@@ -3,6 +3,11 @@
 ### Fixed
 - some issue fixed.
 
+## [0.0.4] - 2024-08-26
+
+### Fixed
+- some issue fixed.
+
 ## [0.0.3] - 2024-08-26
 
 ### Fixed
