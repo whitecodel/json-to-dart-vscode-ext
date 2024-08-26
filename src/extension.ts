@@ -1,8 +1,6 @@
 import * as vscode from 'vscode';
 import { generateDartClassFromString } from './generateDartClassFromString';
 
-
-
 interface Options {
     nullSafety?: boolean;
     makeAllRequired?: boolean;
@@ -13,7 +11,7 @@ interface Options {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    let disposable = vscode.commands.registerCommand('whitecodel-json-to-dart.Start', () => {
+    let disposable = vscode.commands.registerCommand('whitecodel-json-to-dart.Start', async () => {
         const panel = vscode.window.createWebviewPanel(
             'jsonToDart', // Identifies the type of the webview
             'JSON to Dart', // Title of the panel displayed to the user
@@ -25,6 +23,16 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Set the HTML content for the webview
         panel.webview.html = getWebviewContent();
+
+        try {
+            // Automatically read JSON from the clipboard
+            const clipboardText = await vscode.env.clipboard.readText();
+            if (clipboardText && JSON.parse(clipboardText)) {
+                panel.webview.postMessage({ command: 'autoConvert', json: clipboardText });
+            }
+        } catch (error) {
+            // vscode.window.showErrorMessage('Failed to read from clipboard: ' + error.message);
+        }
 
         // Handle messages from the webview
         panel.webview.onDidReceiveMessage(async message => {
@@ -244,6 +252,10 @@ function getWebviewContent(): string {
                     case 'error':
 						hideCopyButton();
                         document.getElementById('dartText').textContent = 'Waiting for valid JSON input...';
+                        break;
+                    case 'autoConvert':
+                        document.getElementById('jsonText').value = message.json;
+                        convert();
                         break;
                 }
             });
