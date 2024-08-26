@@ -1,3 +1,13 @@
+## [0.0.6] - 2024-08-27
+
+### Fixed
+- some issue fixed.
+
+## [0.0.5] - 2024-08-26
+
+### Fixed
+- some issue fixed.
+
 ## [0.0.4] - 2024-08-26
 
 ### Fixed
