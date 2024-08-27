@@ -1,3 +1,8 @@
+## [0.0.7] - 2024-08-27
+
+### Fixed
+- more flexible with dart keyword existing in json key.
+
 ## [0.0.6] - 2024-08-27
 
 ### Fixed
