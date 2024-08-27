@@ -1,3 +1,8 @@
+## [0.0.8] - 2024-08-27
+
+### Fixed
+- extention crashed fixed.
+
 ## [0.0.7] - 2024-08-27
 
 ### Fixed
