@@ -1,3 +1,8 @@
+## [0.0.9] - 2024-08-29
+
+### Fixed
+- more complex json supported.
+
 ## [0.0.8] - 2024-08-27
 
 ### Fixed
