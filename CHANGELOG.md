@@ -1,3 +1,8 @@
+## [0.0.11] - 2024-08-30
+
+### Fixed
+- duplicate class name add fixed.
+
 ## [0.0.10] - 2024-08-29
 
 ### Fixed
