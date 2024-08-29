@@ -119,6 +119,11 @@ function getWebviewContent(): string {
 		</style>
     </head>
     <body>
+        <!-- Loader overlay -->
+        <div class="loader-overlay" id="loader">
+            <div class="loader-spinner"></div>
+        </div>
+
         <div id="container">
 			<center>
 				<div class="mt-3">
@@ -225,33 +230,45 @@ function getWebviewContent(): string {
             document.getElementById('jsonText').addEventListener('input', convert);
 
 			function convert() {
-				const json = document.getElementById('jsonText').value;
-					const options = {
-						nullSafety: document.getElementById('nullSafety').checked,
-						putEncoderDecoderInClass: document.getElementById('putEncoderDecoderInClass').checked,
-						makeAllRequired: document.getElementById('makeAllRequired').checked,
-						makeFinal: document.getElementById('makeFinal').checked,
-						generateCopyWith: document.getElementById('generateCopyWith').checked,
-						numForNumber: document.getElementById('numForNumber').checked,
-					};
+                const json = document.getElementById('jsonText').value;
+                const options = {
+                    nullSafety: document.getElementById('nullSafety').checked,
+                    putEncoderDecoderInClass: document.getElementById('putEncoderDecoderInClass').checked,
+                    makeAllRequired: document.getElementById('makeAllRequired').checked,
+                    makeFinal: document.getElementById('makeFinal').checked,
+                    generateCopyWith: document.getElementById('generateCopyWith').checked,
+                    numForNumber: document.getElementById('numForNumber').checked,
+                };
+
+                // Show loader before conversion
+                document.getElementById('loader').style.display = 'flex';
 
                 vscode.postMessage({ command: 'convert', json, options });
-			}
+            }
 
             window.addEventListener('message', event => {
                 const message = event.data;
 
                 switch (message.command) {
                     case 'displayDart':
-						showCopyButton();
                         document.getElementById('dartText').textContent = message.dartClass;
-						dartData = message.dartClass;
-						// Re-apply Prism.js syntax highlighting
+                        dartData = message.dartClass;
+
+                        // Re-apply Prism.js syntax highlighting
                         Prism.highlightElement(document.getElementById('dartText'));
+
+                        // Show copy button
+                        showCopyButton();
+
+                        // Hide loader after conversion is complete
+                        document.getElementById('loader').style.display = 'none';
                         break;
                     case 'error':
-						hideCopyButton();
                         document.getElementById('dartText').textContent = 'Waiting for valid JSON input...';
+                        hideCopyButton();
+
+                        // Hide loader in case of an error
+                        document.getElementById('loader').style.display = 'none';
                         break;
                     case 'autoConvert':
                         document.getElementById('jsonText').value = message.json;
@@ -259,6 +276,7 @@ function getWebviewContent(): string {
                         break;
                 }
             });
+
         </script>
 		<!-- Prism JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.js"></script>
