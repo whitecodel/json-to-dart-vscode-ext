@@ -225,18 +225,6 @@ function getWebviewContent(): string {
             	document.getElementById('copyButton').classList.remove('d-none');
             }
 
-			// if any option is changed, convert JSON to Dart again
-            document.getElementById('nullSafety').addEventListener('change', debouncedConvertJsonToDart);
-            document.getElementById('putEncoderDecoderInClass').addEventListener('change', debouncedConvertJsonToDart);
-            document.getElementById('makeAllRequired').addEventListener('change', debouncedConvertJsonToDart);
-            document.getElementById('makeFinal').addEventListener('change', debouncedConvertJsonToDart);
-            document.getElementById('generateCopyWith').addEventListener('change', debouncedConvertJsonToDart);
-            document.getElementById('numForNumber').addEventListener('change', debouncedConvertJsonToDart);
-			document.getElementById('copyButton').addEventListener('click', copyToClipboard);
-
-            document.getElementById('jsonText').addEventListener('input', debouncedConvertJsonToDart);
-            document.getElementById('classNameInput').addEventListener('input', debouncedConvertJsonToDart);
-
             // Debounce function to limit the rate at which a function can fire
             function debounce(func, wait) {
                 let timeout;
@@ -249,6 +237,18 @@ function getWebviewContent(): string {
 
             // Wrap convertJsonToDart in debounce with a delay of 500ms
             const debouncedConvertJsonToDart = debounce(convert, 500);
+
+			// if any option is changed, convert JSON to Dart again
+            document.getElementById('nullSafety').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('putEncoderDecoderInClass').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('makeAllRequired').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('makeFinal').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('generateCopyWith').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('numForNumber').addEventListener('change', debouncedConvertJsonToDart);
+			document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+
+            document.getElementById('jsonText').addEventListener('input', debouncedConvertJsonToDart);
+            document.getElementById('classNameInput').addEventListener('input', debouncedConvertJsonToDart);
 
 			function convert() {
                 const json = document.getElementById('jsonText').value;
