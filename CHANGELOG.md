@@ -1,3 +1,11 @@
+## [0.0.12] - 2024-08-30
+
+### Fixed
+- duplicate class name fixed.
+
+### New Feature
+- class name input.
+
 ## [0.0.11] - 2024-08-30
 
 ### Fixed

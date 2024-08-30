@@ -41,8 +41,9 @@ export function activate(context: vscode.ExtensionContext) {
                     try {
                         const jsonString = message.json;
                         const options: Options = message.options;
+                        const className = message.className != null && message.className != '' ? message.className : 'ModelClass';
 
-                        const dartClass = generateDartClassFromString(jsonString, options);
+                        const dartClass = generateDartClassFromString(jsonString, options, className, new Map(),  true);
 
                         // Send the Dart class back to the webview
                         panel.webview.postMessage({ command: 'displayDart', dartClass });
@@ -157,16 +158,22 @@ function getWebviewContent(): string {
                     <label class="form-check-label" for="numForNumber">Use \`num\` for Number</label>
                 </div>
             </div>
-			<div class="row mt-5">
+            <div class="row mt-3">
+                <div class="col-12 col-md-6 mb-4">
+                    <h4>Class Name</h4>
+                    <input type="text" class="form-control" id="classNameInput" placeholder="ModelClass">
+                </div>
+            </div>
+			<div class="row mt-2">
 				<div class="col-12 col-md-6 mb-4" id="jsonInput">
 					<h2>JSON Input</h2>
-					<textarea class="form-control" id="jsonText" rows="13"
+					<textarea class="form-control" id="jsonText" rows="11"
 							placeholder="Enter JSON data here"></textarea>
 				</div>
 				<div class="col-12 col-md-6" id="dartOutput">
 					<h2>Dart Output</h2>
 					<div class="position-relative">
-						<pre style="height: 320px;"><code class="language-dart" id="dartText"></code></pre>
+						<pre style="height: 280px;"><code class="language-dart" id="dartText"></code></pre>
 						<button id="copyButton" class="btn btn-sm btn-light position-absolute d-none"
                             style="top: 10px; right: 10px;">
                             <img src="https://tools.whitecodel.com/icons/copy-icon.png" alt="" height="20px">
@@ -177,7 +184,7 @@ function getWebviewContent(): string {
 			</div>
 
 			<!-- Personal Information -->
-            <div class="mt-5">
+            <div class="mt-2">
                 <p class="text-center">Made with ❤️ by Bhawani Shankar</p>
                 <div class="text-center">
                     <a href="https://www.instagram.com/bhawani_shankar_official" target="_blank" class="me-3"><img
@@ -219,15 +226,29 @@ function getWebviewContent(): string {
             }
 
 			// if any option is changed, convert JSON to Dart again
-            document.getElementById('nullSafety').addEventListener('change', convert);
-            document.getElementById('putEncoderDecoderInClass').addEventListener('change', convert);
-            document.getElementById('makeAllRequired').addEventListener('change', convert);
-            document.getElementById('makeFinal').addEventListener('change', convert);
-            document.getElementById('generateCopyWith').addEventListener('change', convert);
-            document.getElementById('numForNumber').addEventListener('change', convert);
+            document.getElementById('nullSafety').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('putEncoderDecoderInClass').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('makeAllRequired').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('makeFinal').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('generateCopyWith').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('numForNumber').addEventListener('change', debouncedConvertJsonToDart);
 			document.getElementById('copyButton').addEventListener('click', copyToClipboard);
 
-            document.getElementById('jsonText').addEventListener('input', convert);
+            document.getElementById('jsonText').addEventListener('input', debouncedConvertJsonToDart);
+            document.getElementById('classNameInput').addEventListener('input', debouncedConvertJsonToDart);
+
+            // Debounce function to limit the rate at which a function can fire
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+
+            // Wrap convertJsonToDart in debounce with a delay of 500ms
+            const debouncedConvertJsonToDart = debounce(convert, 500);
 
 			function convert() {
                 const json = document.getElementById('jsonText').value;
@@ -239,11 +260,12 @@ function getWebviewContent(): string {
                     generateCopyWith: document.getElementById('generateCopyWith').checked,
                     numForNumber: document.getElementById('numForNumber').checked,
                 };
+                const className = document.getElementById('classNameInput').value;
 
                 // Show loader before conversion
                 document.getElementById('loader').style.display = 'flex';
 
-                vscode.postMessage({ command: 'convert', json, options });
+                vscode.postMessage({ command: 'convert', json, options, className });
             }
 
             window.addEventListener('message', event => {
