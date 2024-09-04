@@ -1,5 +1,7 @@
 # WhiteCodel JSON to Dart Model Converter
 
+![Intro GIF](intro.gif)
+
 ## Overview
 
 The **WhiteCodel JSON to Dart Model Converter** is a Visual Studio Code extension that allows you to quickly convert a JSON structure into a Dart model. This extension simplifies the process of generating Dart models from JSON, helping you streamline your Flutter development workflow.
