@@ -187,9 +187,9 @@ function getWebviewContent(): string {
             <div class="mt-2">
                 <p class="text-center">Made with ❤️ by Bhawani Shankar</p>
                 <div class="text-center">
-                    <a href="https://www.instagram.com/bhawani_shankar_official" target="_blank" class="me-3"><img
+                    <a href="https://www.instagram.com/bhawani_tech_dev" target="_blank" class="me-3"><img
                             src="https://tools.whitecodel.com/icons/instagram.png" alt="Instagram" width="60"></a>
-                    <a href="https://twitter.com/bhawani8387" target="_blank" class="me-3"><img src="https://tools.whitecodel.com/icons/twitter.png"
+                    <a href="https://twitter.com/BhawaniTechDev" target="_blank" class="me-3"><img src="https://tools.whitecodel.com/icons/twitter.png"
                             alt="Twitter" width="40"></a>
                     <a href="https://www.linkedin.com/in/bhawani-shankar-mahawar-601777170/" target="_blank"><img
                             src="https://tools.whitecodel.com/icons/linkedin.png" alt="LinkedIn" width="32"></a>
