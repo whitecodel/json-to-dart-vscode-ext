@@ -8,6 +8,7 @@ interface Options {
     putEncoderDecoderInClass?: boolean;
     generateCopyWith?: boolean;
     numForNumber?: boolean;
+    stringForNumber?: boolean;
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -157,6 +158,10 @@ function getWebviewContent(): string {
                     <input class="form-check-input" type="checkbox" id="numForNumber" checked>
                     <label class="form-check-label" for="numForNumber">Use \`num\` for Number</label>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="stringForNumber">
+                    <label class="form-check-label" for="stringForNumber">Use \`String\` for Number</label>
+                </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12 col-md-6 mb-4">
@@ -245,6 +250,7 @@ function getWebviewContent(): string {
             document.getElementById('makeFinal').addEventListener('change', debouncedConvertJsonToDart);
             document.getElementById('generateCopyWith').addEventListener('change', debouncedConvertJsonToDart);
             document.getElementById('numForNumber').addEventListener('change', debouncedConvertJsonToDart);
+            document.getElementById('stringForNumber').addEventListener('change', debouncedConvertJsonToDart);
 			document.getElementById('copyButton').addEventListener('click', copyToClipboard);
 
             document.getElementById('jsonText').addEventListener('input', debouncedConvertJsonToDart);
@@ -259,6 +265,7 @@ function getWebviewContent(): string {
                     makeFinal: document.getElementById('makeFinal').checked,
                     generateCopyWith: document.getElementById('generateCopyWith').checked,
                     numForNumber: document.getElementById('numForNumber').checked,
+                    stringForNumber: document.getElementById('stringForNumber').checked,
                 };
                 const className = document.getElementById('classNameInput').value;
 

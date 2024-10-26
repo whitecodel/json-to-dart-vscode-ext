@@ -1,3 +1,8 @@
+## [0.0.16] - 2024-10-26
+
+### Add
+- Use ⁠ String ⁠for Number option added.
+
 ## [0.0.15] - 2024-09-04
 
 ### Fixed
